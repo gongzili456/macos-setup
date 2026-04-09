@@ -1,0 +1,60 @@
+name: Test Brewfile
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  brewfile:
+    name: Validate Brewfile
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Homebrew
+        run: |
+          which brew || { echo "Homebrew not found"; exit 1; }
+          brew --version
+
+      - name: Validate Brewfile — force install every run
+        run: brew bundle install --file=Brewfile --verbose || { echo "Brewfile install failed"; exit 1; }
+
+      - name: Verify AI-Agent essentials
+        run: |
+          # 从 Brewfile 动态提取所有 brew 条目
+          BREWFILE_TOOLS=$(grep "^brew " Brewfile | awk '{print $2}' | sort)
+          for tool in $BREWFILE_TOOLS; do
+            if ! command -v $tool &>/dev/null; then
+              echo "MISSING: $tool"
+              exit 1
+            fi
+            echo "OK: $tool"
+          done
+
+  setup-script:
+    name: Test setup.sh
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run setup.sh (no interactive)
+        env:
+          CI: true
+        run: |
+          chmod +x setup.sh
+          # 跳过交互步骤，直接验证脚本语法
+          zsh -n setup.sh
+          echo "setup.sh syntax OK"
+
+      - name: Check required tools for setup.sh
+        run: |
+          # 验证 setup.sh 依赖的工具都存在
+          for tool in xcode-select brew zsh grep sed awk; do
+            if ! command -v $tool &>/dev/null; then
+              echo "MISSING for setup.sh: $tool"
+              exit 1
+            fi
+            echo "OK: $tool"
+          done
