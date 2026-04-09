@@ -24,7 +24,7 @@ jobs:
       - name: Verify AI-Agent essentials
         run: |
           # 从 Brewfile 动态提取所有 brew 条目
-          BREWFILE_TOOLS=$(grep "^brew " Brewfile | awk '{print $2}' | sort)
+          BREWFILE_TOOLS=$(grep "^brew " Brewfile | awk '{print $2}' | tr -d '"' | sort)
           for tool in $BREWFILE_TOOLS; do
             if ! command -v $tool &>/dev/null; then
               echo "MISSING: $tool"
