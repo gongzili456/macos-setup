@@ -136,7 +136,15 @@ fi
 # ─────────────────────────────────────────
 step "验证工具链"
 # 从 Brewfile 动态提取所有 brew 条目（不含 cask，cask 是 GUI app）
-AGENT_TOOLS=($(grep "^brew " "$BREWFILE" | awk '{print $2}' | tr -d '"' | sort))
+# brew 公式名可能和二进制名不同，ripgrep → rg
+mapfile -t BREWFORMULAS < <(grep "^brew " "$BREWFILE" | awk '{print $2}' | tr -d '"' | sort)
+AGENT_TOOLS=()
+for formula in "${BREWFORMULAS[@]}"; do
+  case "$formula" in
+    ripgrep) AGENT_TOOLS+=("rg") ;;
+    *)       AGENT_TOOLS+=("$formula") ;;
+  esac
+done
 info "从 Brewfile 提取 ${#AGENT_TOOLS[@]} 个 CLI 工具待验证"
 all_ok=true
 failed_tools=()
