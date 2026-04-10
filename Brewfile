@@ -20,24 +20,80 @@ brew "gh"
 # Shells & Environment
 # ─────────────────────────────────────────
 brew "zsh"
+brew "fish"
 brew "starship"
+brew "atuin"               # shell 历史增强
+brew "zoxide"             # 智能 cd
 
 # ─────────────────────────────────────────
 # Runtime Version Managers
 # ─────────────────────────────────────────
 brew "mise"
-
-# ─────────────────────────────────────────
-# macOS-specific Tools
-# ─────────────────────────────────────────
-# 窗口管理
-cask "rectangle"
+# Python/Go/Node 等通过 mise 管理：mise install python go node
+# 不在这里用 brew/pyenv/goenv 重复装
 
 # ─────────────────────────────────────────
 # Development Tools
 # ─────────────────────────────────────────
-# 基础开发工具（通过 mise 管理版本，此处仅安装 mise 本身）
-# Node/Python/Go 由 mise 在 setup.sh 中安装
+brew "neovim"
+brew "lazygit"
+brew "git-town"
+brew "git-delta"
+brew "pre-commit"          # 需配合 .pre-commit-config.yaml 使用才生效
+brew "pnpm"
+brew "act"                 # 本地运行 GitHub Actions
+brew "docker"
+brew "docker-compose"
+
+# Kubernetes
+brew "kubectl"
+brew "kubectx"
+brew "k9s"
+brew "kubie"
+brew "stern"
+
+# 协议 / 网络
+brew "httpie"
+brew "yq"
+
+# ─────────────────────────────────────────
+# macOS-specific Tools
+# ─────────────────────────────────────────
+cask "ghostty"             # 终端（macOS 独占）
+cask "rectangle"
+cask "karabiner-elements"
+cask "mas"                  # App Store CLI（用于 mas install）
+
+# ─────────────────────────────────────────
+# AI / LLM 工具
+# ─────────────────────────────────────────
+cask "ollama"
+cask "claude-code"
+cask "cursor"
+cask "chatgpt"
+cask "codex-app"
+cask "linear-linear"
+
+# ─────────────────────────────────────────
+# Development Apps
+# ─────────────────────────────────────────
+cask "visual-studio-code"
+cask "zed"
+cask "arc"
+cask "orbstack"            # Docker/K8s 运行时（macOS），colima 的替代方案
+cask "devutils"            # $200+ 付费套件：SQLite/Firebase/MongoDB/Redis 查看器等
+cask "bruno"
+cask "dbeaver-community"
+cask "android-studio"
+cask "bitwarden"
+
+# ─────────────────────────────────────────
+# Design & Productivity
+# ─────────────────────────────────────────
+cask "figma"
+cask "obsidian"
+cask "notion"
+cask "raycast"
 
 # ─────────────────────────────────────────
 # Utilities
@@ -45,4 +101,32 @@ cask "rectangle"
 brew "tree"
 brew "ncdu"
 brew "htop"
-brew "mas"  # macOS App Store CLI
+brew "watch"
+brew "tldr"
+brew "autoconf"
+brew "automake"
+brew "libtool"
+brew "pkg-config"
+brew "gettext"
+brew "openssl@3"
+brew "sqlite"
+
+# ─────────────────────────────────────────
+# Communication
+# ─────────────────────────────────────────
+cask "telegram"
+cask "discord"
+cask "feishu"
+cask "wechat"
+cask "windows-app"
+
+# ─────────────────────────────────────────
+# Other Apps
+# ─────────────────────────────────────────
+cask "google-chrome"
+cask "iina"
+cask "snipaste"
+cask "betterdisplay"
+cask "keycastr"
+cask "proxyman"
+cask "tailscale-app"
