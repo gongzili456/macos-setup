@@ -37,13 +37,10 @@ brew "mise"
 # ─────────────────────────────────────────
 brew "neovim"
 brew "lazygit"
-brew "git-town"
 brew "git-delta"
 brew "pre-commit"          # 需配合 .pre-commit-config.yaml 使用才生效
 brew "pnpm"
 brew "act"                 # 本地运行 GitHub Actions
-brew "docker"
-brew "docker-compose"
 
 # Kubernetes
 brew "kubectl"
@@ -103,11 +100,7 @@ brew "ncdu"
 brew "htop"
 brew "watch"
 brew "tldr"
-brew "autoconf"
-brew "automake"
-brew "libtool"
 brew "pkg-config"
-brew "gettext"
 brew "openssl@3"
 brew "sqlite"
 
